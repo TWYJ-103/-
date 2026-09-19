@@ -33,6 +33,7 @@ object Lsp10xHookImpl : IHookBridge, ILoaderService {
     override val frameworkVersionCode: Long get() = self.frameworkVersionCode
     override val hookCounter: Long get() = Lsp10xHookWrapper.hookCounter.toLong()
     override val hookedMethods: Set<Member?> get() = Lsp10xHookWrapper.hookedMethodsRaw
+    override val loaderName: String = "LSP10x 加载器"
     override val entryPointName: String = "com.Johnny.wcx.loader.entry.lsp10x.Lsp10xHookImpl"
     override val loaderVersionCode: Int = BuildConfig.VERSION_CODE
     override val loaderVersionName: String = BuildConfig.VERSION_NAME

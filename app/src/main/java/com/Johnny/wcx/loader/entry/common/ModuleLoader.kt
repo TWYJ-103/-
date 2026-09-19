@@ -34,9 +34,8 @@ object ModuleLoader {
         hookBridge: IHookBridge?,
         modulePath: String,
         allowDynamicLoad: Boolean
-    ) {
-        if (isInitialized) return
-        isInitialized = true
+    ): Boolean {
+        if (isInitialized) return true
 
         // Save parameters for potential hot-reload
         savedHostClassLoader = initialClassLoader
@@ -46,9 +45,14 @@ object ModuleLoader {
         savedHostDataDir = hostDataDir
 
         WeLogger.i(TAG, "loading in entry point ${loaderService.entryPointName}")
-        runCatching {
+        return try {
             UnifiedEntryPoint.entry(loaderService, hookBridge, initialClassLoader, modulePath)
-        }.onFailure { WeLogger.e(TAG, "UnifiedEntryPoint failed", it) }
+            isInitialized = true
+            true
+        } catch (t: Throwable) {
+            WeLogger.e(TAG, "UnifiedEntryPoint failed", t)
+            false
+        }
     }
 
     /**

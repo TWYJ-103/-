@@ -35,6 +35,7 @@ object StartupAgent {
         val realClassLoader = application.baseContext.classLoader
         HybridClassLoader.hostClassLoader = realClassLoader
         ReflectionClassLoader.value = realClassLoader
+        StartupInfo.modulePath = modulePath
         StartupInfo.loaderService = loaderService
         StartupInfo.hookBridge = hookBridge
 

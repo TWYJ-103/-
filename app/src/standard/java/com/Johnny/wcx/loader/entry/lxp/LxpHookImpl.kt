@@ -28,6 +28,7 @@ object LxpHookImpl : IHookBridge, ILoaderService {
     override val frameworkVersionCode: Long get() = self.frameworkVersionCode
     override val hookCounter: Long get() = LxpHookWrapper.hookCounter.toLong()
     override val hookedMethods: Set<Member?> get() = LxpHookWrapper.hookedMethodsRaw
+    override val loaderName: String = "LibXposed 加载器"
     override val entryPointName: String = "com.Johnny.wcx.loader.entry.lxp.LxpHookImpl"
     override val loaderVersionCode: Int = BuildConfig.VERSION_CODE
     override val loaderVersionName: String = BuildConfig.VERSION_NAME
